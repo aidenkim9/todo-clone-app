@@ -1,0 +1,9 @@
+.container {
+    padding: 5rem 2rem 2rem 10rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 3rem;
+}
