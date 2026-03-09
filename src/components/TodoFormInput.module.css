@@ -1,21 +1,26 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .label {
-    font-size: 1rem;
-    font-weight: 600;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .textarea {
-    outline: none;
-    padding: 0.5rem
+  outline: none;
+  padding: 0.5rem;
+  border: 0.01rem solid black;
+  height: 3rem;
 }
 
 .input {
-    outline: none;
-    padding: 0.5rem;
-    
+  outline: none;
+  padding: 0.5rem;
+  border: 0.01rem solid black;
+  border-radius: 0.2rem;
+  height: 1.5rem;
+  font-size: 1rem;
 }

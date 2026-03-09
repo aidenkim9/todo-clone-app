@@ -1,23 +1,21 @@
-
 .container {
-    width: 100%;
-    max-width: 17%;
-    background-color: #FCFAF8;
-    padding: 2rem
+  width: 100%;
+  max-width: 17%;
+  background-color: #fcfaf8;
+  padding: 2rem;
+  font-weight: 300;
+  font-size: 14px;
+  color: black;
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-}
-
-.action-list li {
-    margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .action-list li:first-child {
-    color: #DC4B3E;
-    font-size: 16px;
-    font-weight: 400;
+  color: #dc4b3e;
+  font-size: 16px;
+  font-weight: 400;
 }

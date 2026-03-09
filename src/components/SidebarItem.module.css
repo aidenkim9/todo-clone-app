@@ -1,3 +1,26 @@
 .container {
-    cursor: pointer;
+  cursor: pointer;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.15s ease-in-out;
+  display: flex;
+  gap: 0.8rem;
+  color: black;
+}
+
+.container:hover {
+  background-color: #f1eded;
+}
+
+.active {
+  background-color: #ffefe5;
+}
+
+.active:hover {
+  background-color: #ffefe5;
+}
+
+.link {
+  display: inline-block;
+  width: 100%;
 }
