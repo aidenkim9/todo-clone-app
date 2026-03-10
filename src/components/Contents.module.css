@@ -1,16 +1,5 @@
 /* main color: #DC4B3E */
 
-.container {
-  padding: 5rem 2rem 2rem 10rem;
-  width: 100%;
-}
-
-.title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 3rem;
-}
-
 .add-todo-button {
   cursor: pointer;
   transition: all 0.1s ease-out;
@@ -19,33 +8,4 @@
 .add-todo-button:hover {
   color: #dc4b3e;
   font-weight: 400;
-}
-
-.todos {
-  margin: 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.todo {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  border-bottom: 0.01rem solid gray;
-  padding-bottom: 1.5rem;
-  width: 80%;
-}
-
-.todo-button {
-  border: none;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: all 0.15s ease-out;
-}
-
-.todo-button:hover {
-  background-color: #dc4b3e;
-  color: white;
 }

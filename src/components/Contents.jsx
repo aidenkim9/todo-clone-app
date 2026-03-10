@@ -1,50 +1,31 @@
-import { useState } from "react";
+import { useTodoContext } from "../store/todos-context";
 import classes from "./Contents.module.css";
-import NewTodo from "./NewTodo";
+
+import Todos from "./Todos";
 
 export default function Contents() {
-  const [todoAction, setTodoAction] = useState(false);
-  const [todos, setTodos] = useState([]);
+  const { todos, todoAction, handleStartTodoAction } = useTodoContext();
 
-  function handleTodoAction() {
-    setTodoAction((prev) => !prev);
-  }
-  function handleAddTodo(todo) {
-    setTodos((prevTodos) => {
-      const updatedTodos = [...prevTodos];
-      updatedTodos.push({ id: Math.random(), ...todo });
-      return updatedTodos;
-    });
-  }
-  function handleDeleteTodo(id) {
-    setTodos((prevTodos) => {
-      const updatedTodos = [...prevTodos];
-      const afterDeletedTodos = updatedTodos.filter((todo) => todo.id !== id);
-      return afterDeletedTodos;
-    });
-  }
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const todayTodos = todos.filter((todo) => {
+    const due = new Date(todo.date);
+    due.setHours(0, 0, 0, 0);
+
+    return due.toDateString() === today.toDateString();
+  });
+
+  console.log(todayTodos);
 
   return (
-    <main className={classes.container}>
-      <h1 className={classes.title}>오늘</h1>
+    <main>
+      <h1 className="title">오늘</h1>
       <div>
-        {todos && (
-          <ul className={classes.todos}>
-            {todos.map((todo) => (
-              <li key={todo.id} className={classes.todo}>
-                <button type="button" className={classes["todo-button"]} onClick={() => handleDeleteTodo(todo.id)}>
-                  완료
-                </button>
-                <span>{todo.title}</span>
-              </li>
-            ))}
-          </ul>
-        )}
+        <Todos todos={todayTodos} />
         <div>
-          {todoAction ? (
-            <NewTodo onClose={handleTodoAction} addTodo={handleAddTodo} />
-          ) : (
-            <span onClick={handleTodoAction} className={classes["add-todo-button"]}>
+          {!todoAction && (
+            <span onClick={handleStartTodoAction} className={classes["add-todo-button"]}>
               + 작업 추가
             </span>
           )}

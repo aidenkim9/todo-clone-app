@@ -10,7 +10,16 @@ body {
 
 .main-container {
   display: flex;
-  justify-content: space-between;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+}
+
+.content-container {
+  padding: 5rem 2rem 2rem 10rem;
+  width: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 3rem;
 }

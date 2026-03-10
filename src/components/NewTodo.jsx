@@ -1,13 +1,16 @@
+import { useTodoContext } from "../store/todos-context";
 import classes from "./NewTodo.module.css";
 import TodoFormInput from "./TodoFormInput";
 
-export default function NewTodo({ onClose, addTodo }) {
+export default function NewTodo() {
+  const { handleStopTodoAction, handleAddTodo } = useTodoContext();
+
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const todo = Object.fromEntries(formData.entries());
-    addTodo(todo);
-    onClose();
+    handleAddTodo(todo);
+    handleStopTodoAction();
   }
 
   return (
@@ -17,7 +20,7 @@ export default function NewTodo({ onClose, addTodo }) {
       <TodoFormInput label="date" title="마감일" />
 
       <div className={classes["form-actions"]}>
-        <button type="button" onClick={onClose} className={classes["button-text"]}>
+        <button type="button" onClick={handleStopTodoAction} className={classes["button-text"]}>
           취소
         </button>
         <button className={classes.button}>작업 추가</button>
