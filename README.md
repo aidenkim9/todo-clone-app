@@ -83,3 +83,12 @@ npm run dev
 | `/today`  | `Contents` | 오늘 할 일     |
 | `/next`   | `Next`     | 다음 예정 작업 |
 | `/finish` | `Finish`   | 완료한 작업    |
+
+## 실행 이미지
+
+<img width="1440" height="790" alt="스크린샷 2026-03-10 오후 11 00 45" src="https://github.com/user-attachments/assets/f3c8503f-1425-4a83-bdf2-6bdb2a082d6f" />
+<img width="1440" height="789" alt="스크린샷 2026-03-10 오후 11 01 02" src="https://github.com/user-attachments/assets/18086e3b-6c00-4cd9-8d3b-f3de57f5d922" />
+<img width="1440" height="788" alt="스크린샷 2026-03-10 오후 11 08 24" src="https://github.com/user-attachments/assets/201a6a68-476d-4f3b-8baf-687dfa8c43ef" />
+<img width="1440" height="789" alt="스크린샷 2026-03-10 오후 11 08 35" src="https://github.com/user-attachments/assets/d3238181-8304-4270-95d4-d17a9827a0ff" />
+<img width="1440" height="789" alt="스크린샷 2026-03-10 오후 11 08 44" src="https://github.com/user-attachments/assets/4084699c-708f-42dd-9acc-0ea18fb3c98f" />
+
