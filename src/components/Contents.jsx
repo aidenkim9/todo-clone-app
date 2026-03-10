@@ -16,8 +16,6 @@ export default function Contents() {
     return due.toDateString() === today.toDateString();
   });
 
-  console.log(todayTodos);
-
   return (
     <main>
       <h1 className="title">오늘</h1>

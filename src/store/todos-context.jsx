@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import crypto from "crypto";
 
 const todoContext = createContext({
   todos: [],
@@ -29,7 +30,7 @@ export default function TodoContextProvider({ children }) {
   function handleAddTodo(todo) {
     setTodos((prevTodos) => {
       const updatedTodos = [...prevTodos];
-      updatedTodos.push({ id: Math.random(), ...todo });
+      updatedTodos.push({ id: crypto.randomUUID(), ...todo });
       return updatedTodos;
     });
   }

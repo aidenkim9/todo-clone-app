@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 // Sidebar only Context
 
-const sidbarContext = createContext({ activeContent: "", handleActive: () => {} });
+const sidebarContext = createContext({ activeContent: "", handleActive: () => {} });
 
 export function useSidebarContext() {
-  const context = useContext(sidbarContext);
+  const context = useContext(sidebarContext);
   return context;
 }
 
@@ -27,7 +27,7 @@ export default function Sidebar() {
   };
 
   return (
-    <sidbarContext.Provider value={ctxValue}>
+    <sidebarContext.Provider value={ctxValue}>
       <div className={classes.container}>
         <header className={classes.header}>
           <p>
@@ -52,6 +52,6 @@ export default function Sidebar() {
           </SidebarItem>
         </ul>
       </div>
-    </sidbarContext.Provider>
+    </sidebarContext.Provider>
   );
 }

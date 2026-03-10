@@ -13,8 +13,6 @@ export default function Next() {
     return due > today;
   });
 
-  console.log(afterTodayTodos);
-
   return (
     <main>
       <h1 className="title">다음</h1>

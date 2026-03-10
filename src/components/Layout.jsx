@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidbar";
+import Sidebar from "./Sidebar";
 import { useTodoContext } from "../store/todos-context";
 import NewTodo from "./NewTodo";
 

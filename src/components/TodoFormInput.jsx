@@ -7,9 +7,9 @@ export default function TodoFormInput({ label, title, type }) {
         {title}
       </label>
       {type === "textarea" ? (
-        <textarea type="text" id="description" name="description" className={classes.textarea} />
+        <textarea type="text" id="description" name="description" className={classes.textarea} required />
       ) : (
-        <input type={label === "date" ? "date" : "text"} id={label} name={label} className={classes.input} />
+        <input type={label === "date" ? "date" : "text"} id={label} name={label} className={classes.input} required />
       )}
     </p>
   );

@@ -7,7 +7,7 @@ export default function Finish() {
   return (
     <div>
       <h1 className="title">완료한 작업</h1>
-      <Todos todos={finishedTodos} finish={true} />
+      <Todos todos={finishedTodos} finish />
     </div>
   );
 }

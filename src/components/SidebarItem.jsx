@@ -1,20 +1,23 @@
 import { useTodoContext } from "../store/todos-context";
-import { useSidebarContext } from "./Sidbar";
 import classes from "./SidebarItem.module.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function SidebarItem({ children, name }) {
-  const { activeContent, handleActive } = useSidebarContext();
-  const { handleStartTodoAction } = useTodoContext();
+  const { todoAction, handleStopTodoAction, handleStartTodoAction } = useTodoContext();
 
   return (
-    <li className={`${classes.container} ${activeContent === name ? classes.active : ""}`}>
+    <li className={`${classes.container}`}>
       {name === "add-todo" ? (
-        <span onClick={handleStartTodoAction}>{children}</span>
-      ) : (
-        <Link to={"/" + name} onClick={() => handleActive(name)} className={classes.link}>
+        <span onClick={todoAction ? handleStopTodoAction : handleStartTodoAction} style={{ margin: "1rem 0" }}>
           {children}
-        </Link>
+        </span>
+      ) : (
+        <NavLink
+          to={"/" + name}
+          className={({ isActive }) => (isActive ? `${classes.link} ${classes.active}` : classes.link)}
+        >
+          {children}
+        </NavLink>
       )}
     </li>
   );
