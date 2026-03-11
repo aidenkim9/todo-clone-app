@@ -20,13 +20,14 @@ export default function Contents() {
     <main>
       <h1 className="title">오늘</h1>
       <div>
-        <Todos todos={todayTodos} />
+        {todayTodos.length > 0 && <Todos todos={todayTodos} />}
         <div>
           {!todoAction && (
             <span onClick={handleStartTodoAction} className={classes["add-todo-button"]}>
               + 작업 추가
             </span>
           )}
+          {!todayTodos.length > 0 && !todoAction && <p className="empty-message">오늘 할 일을 추가해보세요!</p>}
         </div>
       </div>
     </main>

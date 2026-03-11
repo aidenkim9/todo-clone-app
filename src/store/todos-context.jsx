@@ -1,5 +1,7 @@
 import { createContext, useContext, useState } from "react";
-import crypto from "crypto";
+import { v4 as uuid4 } from "uuid";
+
+// useReducer로 변경하기
 
 const todoContext = createContext({
   todos: [],
@@ -9,6 +11,8 @@ const todoContext = createContext({
   handleStopTodoAction: () => {},
   handleAddTodo: (todo) => {},
   handleFinishTodo: (id) => {},
+  handleDeleteTodo: (id) => {},
+  handleEditTodo: (todo) => {},
 });
 
 export function useTodoContext() {
@@ -16,8 +20,9 @@ export function useTodoContext() {
 }
 
 export default function TodoContextProvider({ children }) {
+  const localTodos = JSON.parse(localStorage.getItem("todos"));
   const [todoAction, setTodoAction] = useState(false);
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(localTodos || []);
   const [finishedTodos, setFinishedTodos] = useState([]);
 
   function handleStartTodoAction() {
@@ -30,7 +35,8 @@ export default function TodoContextProvider({ children }) {
   function handleAddTodo(todo) {
     setTodos((prevTodos) => {
       const updatedTodos = [...prevTodos];
-      updatedTodos.push({ id: crypto.randomUUID(), ...todo });
+      updatedTodos.push({ id: uuid4(), ...todo });
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
       return updatedTodos;
     });
   }
@@ -39,13 +45,50 @@ export default function TodoContextProvider({ children }) {
     setFinishedTodos((prevFinishedTodos) => {
       const finishedTodo = todos.filter((todo) => todo.id === id);
       const updatedFinishedTodos = [...prevFinishedTodos, ...finishedTodo];
+      localStorage.setItem("finish-todos", JSON.stringify(updatedFinishedTodos));
       return updatedFinishedTodos;
     });
 
     setTodos((prevTodos) => {
       const updatedTodos = [...prevTodos];
       const afterDeletedTodos = updatedTodos.filter((todo) => todo.id !== id);
+      localStorage.removeItem("todos");
+      localStorage.setItem("todos", JSON.stringify(afterDeletedTodos));
       return afterDeletedTodos;
+    });
+  }
+
+  function handleDeleteTodo(id) {
+    const isInTodos = todos.filter((todo) => todo.id === id)[0];
+    const isInFinishedTodos = finishedTodos.filter((todo) => todo.id === id)[0];
+
+    if (isInTodos) {
+      setTodos((prevTodos) => {
+        const updatedTodos = [...prevTodos];
+        const afterDeletedTodos = updatedTodos.filter((todo) => todo.id !== id);
+        localStorage.removeItem("todos");
+        localStorage.setItem("todos", JSON.stringify(afterDeletedTodos));
+        return afterDeletedTodos;
+      });
+
+      if (isInFinishedTodos) {
+        setFinishedTodos((prevTodos) => {
+          const updatedTodos = [...prevTodos];
+          const afterDeletedTodos = updatedTodos.filter((todo) => todo.id !== id);
+          localStorage.removeItem("finish-todos");
+          localStorage.setItem("finish-todos", JSON.stringify(afterDeletedTodos));
+          return afterDeletedTodos;
+        });
+      }
+    }
+  }
+
+  function handleEditTodo(todo) {
+    setTodos((prevTodos) => {
+      const updatedTodos = prevTodos.map((t) => (t.id === todo.id ? { ...todo } : t));
+      localStorage.removeItem("todos");
+      localStorage.setItem("todos", JSON.stringify(updatedTodos));
+      return updatedTodos;
     });
   }
 
@@ -57,6 +100,8 @@ export default function TodoContextProvider({ children }) {
     handleStopTodoAction,
     handleAddTodo,
     handleFinishTodo,
+    handleDeleteTodo,
+    handleEditTodo,
   };
 
   return <todoContext.Provider value={ctxValue}>{children}</todoContext.Provider>;
