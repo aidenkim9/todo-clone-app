@@ -28,15 +28,13 @@ function todosReducer(state, action) {
     case "FINISH":
       const finishedTodo = state.todos.filter((todo) => todo.id === action.id);
       const updatedFinishedTodos = [...state.finishedTodos, ...finishedTodo];
-      localStorage.removeItem("finish-todos");
       localStorage.setItem("finish-todos", JSON.stringify(updatedFinishedTodos));
 
       const updatedTodosFinish = [...state.todos];
       const afterDeletedTodos = updatedTodosFinish.filter((todo) => todo.id !== action.id);
-      localStorage.removeItem("todos");
       localStorage.setItem("todos", JSON.stringify(afterDeletedTodos));
 
-      return { todos: afterDeletedTodos, finishedTodo: updatedFinishedTodos };
+      return { todos: afterDeletedTodos, finishedTodos: updatedFinishedTodos };
 
     case "DELETE":
       const isInTodos = state.todos.filter((todo) => todo.id === action.id)[0];
@@ -45,7 +43,6 @@ function todosReducer(state, action) {
       if (isInTodos) {
         const updatedTodos = [...state.todos];
         const afterDeletedTodos = updatedTodos.filter((todo) => todo.id !== action.id);
-        localStorage.removeItem("todos");
         localStorage.setItem("todos", JSON.stringify(afterDeletedTodos));
 
         return { ...state, todos: afterDeletedTodos };
@@ -54,18 +51,17 @@ function todosReducer(state, action) {
       if (isInFinishedTodos) {
         const updatedTodos = [...state.finishedTodos];
         const afterDeletedTodos = updatedTodos.filter((todo) => todo.id !== action.id);
-        localStorage.removeItem("finish-todos");
         localStorage.setItem("finish-todos", JSON.stringify(afterDeletedTodos));
 
         return { ...state, finishedTodos: afterDeletedTodos };
       }
 
-      return;
+      return state;
+
     case "EDIT":
       const updatedTodosEdit = state.todos.map((t) => (t.id === action.todo.id ? { ...action.todo } : t));
-      localStorage.removeItem("todos");
-      localStorage.setItem("todos", JSON.stringify(updatedTodosEdit));
-      return { ...state, todos: updatedTodosEdit };
+      localStorage.setItem("todos", JSON.stringify(updatedTodosEdit)) || [];
+      return { ...state, todos: updatedTodosEdit } || [];
 
     default:
       return state;
@@ -73,14 +69,11 @@ function todosReducer(state, action) {
 }
 
 export default function TodoContextProvider({ children }) {
-  const localTodos = JSON.parse(localStorage.getItem("todos"));
-  const localFinishedTodos = JSON.parse(localStorage.getItem("finish-todos"));
   const [todoAction, setTodoAction] = useState(false);
-
-  const [state, dispath] = useReducer(todosReducer, {
-    todos: localTodos || [],
-    finishedTodos: localFinishedTodos || [],
-  });
+  const [state, dispatch] = useReducer(todosReducer, undefined, () => ({
+    todos: JSON.parse(localStorage.getItem("todos")),
+    finishedTodos: JSON.parse(localStorage.getItem("finish-todos")),
+  }));
 
   function handleStartTodoAction() {
     setTodoAction(true);
@@ -90,19 +83,19 @@ export default function TodoContextProvider({ children }) {
   }
 
   function handleAddTodo(todo) {
-    dispath({ type: "ADD", todo });
+    dispatch({ type: "ADD", todo });
   }
 
   function handleFinishTodo(id) {
-    dispath({ type: "FINISH", id });
+    dispatch({ type: "FINISH", id });
   }
 
   function handleDeleteTodo(id) {
-    dispath({ type: "DELETE", id });
+    dispatch({ type: "DELETE", id });
   }
 
   function handleEditTodo(todo) {
-    dispath({ type: "EDIT", todo });
+    dispatch({ type: "EDIT", todo });
   }
 
   const ctxValue = {

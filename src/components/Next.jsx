@@ -17,7 +17,7 @@ export default function Next() {
     <main>
       <h1 className="title">다음</h1>
       {afterTodayTodos.length > 0 && <Todos todos={afterTodayTodos} />}
-      {!afterTodayTodos.length > 0 && !todoAction && <p className="empty-message">다음 할 일을 추가해보세요!</p>}
+      {afterTodayTodos.length === 0 && !todoAction && <p className="empty-message">다음 할 일을 추가해보세요!</p>}
     </main>
   );
 }

@@ -4,13 +4,12 @@ import { useState } from "react";
 import TodoForm from "./TodoForm";
 
 export default function Todos({ todos, finish }) {
-  const [isEdit, setIsEdit] = useState(false);
-  function handleEdit() {
-    setIsEdit(true);
+  const [isEditId, setIsEditId] = useState(null);
+  function handleEdit(id) {
+    setIsEditId(id);
   }
-
   function handleStopEdit() {
-    setIsEdit(false);
+    setIsEditId(null);
   }
 
   return (
@@ -18,8 +17,8 @@ export default function Todos({ todos, finish }) {
       {todos && (
         <ul className={classes.todos}>
           {todos.map((todo) => (
-            <div key={todo.id}>
-              <li className={classes.todo}>
+            <li key={todo.id}>
+              <div className={classes.todo}>
                 <div>
                   {!finish && <TodoButton action="완료" id={todo.id} />}
                   <span className={classes.title}>{todo.title}</span>
@@ -34,9 +33,9 @@ export default function Todos({ todos, finish }) {
                     </div>
                   )}
                 </p>
-              </li>
-              {isEdit && <TodoForm prevTodo={todo} stopEdit={handleStopEdit} />}
-            </div>
+              </div>
+              {isEditId === todo.id && <TodoForm prevTodo={todo} stopEdit={handleStopEdit} />}
+            </li>
           ))}
         </ul>
       )}

@@ -27,7 +27,7 @@ export default function Contents() {
               + 작업 추가
             </span>
           )}
-          {!todayTodos.length > 0 && !todoAction && <p className="empty-message">오늘 할 일을 추가해보세요!</p>}
+          {todayTodos.length === 0 && !todoAction && <p className="empty-message">오늘 할 일을 추가해보세요!</p>}
         </div>
       </div>
     </main>
