@@ -6,6 +6,7 @@
   font-weight: 300;
   font-size: 14px;
   color: black;
+  transition: transform 0.25s ease;
 }
 
 .header {
@@ -18,4 +19,36 @@
   color: #dc4b3e;
   font-size: 16px;
   font-weight: 400;
+}
+
+/* ── 태블릿 (768px 이하) ── */
+@media (max-width: 768px) {
+  .container {
+    max-width: 220px;
+    min-width: 180px;
+    padding: 1.5rem;
+    font-size: 13px;
+  }
+}
+
+/* ── 모바일 (480px 이하) ── */
+@media (max-width: 480px) {
+  .container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    max-width: 70vw;
+    min-width: unset;
+    width: 70vw;
+    z-index: 100;
+    padding: 4rem 1.5rem 2rem;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+  }
+
+  /* Layout.jsx에서 sidebar-open 클래스 토글로 열림 */
+  .container.open {
+    transform: translateX(0);
+  }
 }

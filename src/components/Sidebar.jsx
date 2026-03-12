@@ -14,11 +14,12 @@ export function useSidebarContext() {
 
 // sidebar component
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen, onClose }) {
   const [activeContent, setActiveContent] = useState(null);
 
   function handleActive(item) {
     setActiveContent(item);
+    onClose();
   }
 
   const ctxValue = {
@@ -28,7 +29,7 @@ export default function Sidebar() {
 
   return (
     <sidebarContext.Provider value={ctxValue}>
-      <div className={classes.container}>
+      <div className={`${classes.container} ${isOpen ? classes.open : ""}`}>
         <header className={classes.header}>
           <p>
             <Link to="/">TTodoist</Link>
@@ -38,16 +39,16 @@ export default function Sidebar() {
           </p>
         </header>
         <ul className={classes["action-list"]}>
-          <SidebarItem name="add-todo">
+          <SidebarItem name="add-todo" onClose={onClose}>
             <i className="fa-solid fa-circle-plus"></i> <span>작업추가</span>
           </SidebarItem>
-          <SidebarItem name="today">
+          <SidebarItem name="today" onClose={onClose}>
             <i className="fa-regular fa-calendar-days"></i> <span>오늘</span>
           </SidebarItem>
-          <SidebarItem name="next">
+          <SidebarItem name="next" onClose={onClose}>
             <i className="fa-regular fa-calendar-plus"></i> <span>다음</span>
           </SidebarItem>
-          <SidebarItem name="finish">
+          <SidebarItem name="finish" onClose={onClose}>
             <i className="fa-regular fa-circle-check"></i> <span>완료한 작업</span>
           </SidebarItem>
         </ul>

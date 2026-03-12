@@ -19,3 +19,34 @@
 .title {
   margin-left: 1rem;
 }
+
+/* ── 태블릿 (768px 이하) ── */
+@media (max-width: 768px) {
+  .todo {
+    width: 100%;
+  }
+}
+
+/* ── 모바일 (480px 이하) ── */
+@media (max-width: 480px) {
+  .todos {
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .todo {
+    width: 100%;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .title {
+    font-size: 0.95rem;
+    margin-left: 0.5rem;
+    /* 긴 텍스트 말줄임 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 140px;
+  }
+}
