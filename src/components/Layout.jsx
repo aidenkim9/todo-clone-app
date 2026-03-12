@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useTodoContext } from "../store/todos-context";
-import NewTodo from "./NewTodo";
+import TodoForm from "./TodoForm";
 
 export default function Layout() {
   const { todoAction } = useTodoContext();
@@ -10,7 +10,7 @@ export default function Layout() {
       <Sidebar />
       <div className="content-container">
         <Outlet />
-        {todoAction && <NewTodo />}
+        {todoAction && <TodoForm />}
       </div>
     </main>
   );

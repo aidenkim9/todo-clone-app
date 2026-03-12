@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import Layout from "./components/Layout";
 import Contents from "./components/Contents";
 import Home from "./components/Home";
@@ -15,6 +15,12 @@ const router = createBrowserRouter([
       { path: "today", element: <Contents /> },
       { path: "next", element: <Next /> },
       { path: "finish", element: <Finish /> },
+      {
+        path: "*",
+        loader: () => {
+          return redirect("/");
+        },
+      },
     ],
   },
 ]);

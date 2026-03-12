@@ -1,7 +1,7 @@
 import { useTodoContext } from "../store/todos-context";
 import classes from "./TodoButton.module.css";
 
-export default function TodoButton({ action, id }) {
+export default function TodoButton({ action, id, handleEdit }) {
   const { handleFinishTodo, handleDeleteTodo, handleStartTodoAction } = useTodoContext();
 
   function deleteTodoHandler() {
@@ -16,9 +16,7 @@ export default function TodoButton({ action, id }) {
     <button
       type="button"
       className={action === "삭제" ? classes["todo-button-text"] : classes["todo-button"]}
-      onClick={
-        action === "완료" ? () => handleFinishTodo(id) : action === "삭제" ? deleteTodoHandler : handleStartTodoAction
-      }
+      onClick={action === "완료" ? () => handleFinishTodo(id) : action === "삭제" ? deleteTodoHandler : handleEdit}
     >
       {action}
     </button>

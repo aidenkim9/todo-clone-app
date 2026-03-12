@@ -1,34 +1,42 @@
 import classes from "./Todos.module.css";
 import TodoButton from "./TodoButton";
-
-//수정 로직 추가 및 개선
-//날짜 유효성 검사
-//예외 경로 리다이렉트 기능
-//useReducer
+import { useState } from "react";
+import TodoForm from "./TodoForm";
 
 export default function Todos({ todos, finish }) {
+  const [isEdit, setIsEdit] = useState(false);
+  function handleEdit() {
+    setIsEdit(true);
+  }
+
+  function handleStopEdit() {
+    setIsEdit(false);
+  }
+
   return (
     <>
       {todos && (
         <ul className={classes.todos}>
           {todos.map((todo) => (
-            <li key={todo.id} className={classes.todo}>
-              <div>
-                {!finish && <TodoButton action="완료" id={todo.id} />}
-                <span className={classes.title}>{todo.title}</span>
-              </div>
-
-              <p>
-                {finish ? (
-                  <TodoButton action="삭제" id={todo.id} />
-                ) : (
-                  <div>
+            <div key={todo.id}>
+              <li className={classes.todo}>
+                <div>
+                  {!finish && <TodoButton action="완료" id={todo.id} />}
+                  <span className={classes.title}>{todo.title}</span>
+                </div>
+                <p>
+                  {finish ? (
                     <TodoButton action="삭제" id={todo.id} />
-                    <TodoButton action="수정" />
-                  </div>
-                )}
-              </p>
-            </li>
+                  ) : (
+                    <div>
+                      <TodoButton action="삭제" id={todo.id} />
+                      <TodoButton action="수정" id={todo.id} handleEdit={handleEdit} />
+                    </div>
+                  )}
+                </p>
+              </li>
+              {isEdit && <TodoForm prevTodo={todo} stopEdit={handleStopEdit} />}
+            </div>
           ))}
         </ul>
       )}
