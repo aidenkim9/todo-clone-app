@@ -71,8 +71,8 @@ function todosReducer(state, action) {
 export default function TodoContextProvider({ children }) {
   const [todoAction, setTodoAction] = useState(false);
   const [state, dispatch] = useReducer(todosReducer, undefined, () => ({
-    todos: JSON.parse(localStorage.getItem("todos")),
-    finishedTodos: JSON.parse(localStorage.getItem("finish-todos")),
+    todos: JSON.parse(localStorage.getItem("todos")) || [],
+    finishedTodos: JSON.parse(localStorage.getItem("finish-todos")) || [],
   }));
 
   function handleStartTodoAction() {
