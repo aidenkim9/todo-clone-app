@@ -60,8 +60,8 @@ function todosReducer(state, action) {
 
     case "EDIT":
       const updatedTodosEdit = state.todos.map((t) => (t.id === action.todo.id ? { ...action.todo } : t));
-      localStorage.setItem("todos", JSON.stringify(updatedTodosEdit)) || [];
-      return { ...state, todos: updatedTodosEdit } || [];
+      localStorage.setItem("todos", JSON.stringify(updatedTodosEdit));
+      return { ...state, todos: updatedTodosEdit };
 
     default:
       return state;
